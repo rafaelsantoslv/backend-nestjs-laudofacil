@@ -1,6 +1,7 @@
 // auth.controller.ts
 import { Controller, Post, Body, HttpCode } from '@nestjs/common';
 import { AuthService } from './auth.service';
+import { LoginDto } from './dto/loginDto';
 
 @Controller('auth')
 export class AuthController {
@@ -8,9 +9,8 @@ export class AuthController {
 
   @Post('login')
   @HttpCode(200)
-  async login(@Body('email') email: string, @Body('password') password: string) {
-    const user = await this.authService.login(email, password);
-    // Aqui você pode retornar um token JWT ou qualquer outra resposta necessária
+  async login(@Body() loginDto: LoginDto) {
+    const user = await this.authService.login(loginDto);
     return { message: 'Login successful', user };
   }
 }
