@@ -1,7 +1,6 @@
-// user.repository.ts
 import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
-import { User } from 'src/interfaces/user-interface';
+import { User } from 'src/modules/auth/interfaces/user-interface';
 
 @Injectable()
 export class UserRepository {

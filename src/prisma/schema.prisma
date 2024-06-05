@@ -7,7 +7,7 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
-model Usuarios {
+model usuarios {
   id              Int               @id @default(autoincrement())
   email           String            @unique
   password        String
@@ -15,4 +15,36 @@ model Usuarios {
 
   createdAt       DateTime          @default(now())
   updatedAt       DateTime          @default(now()) @updatedAt
+}
+
+model pacientes {
+  id            Int       @id @default(autoincrement())
+  nome          String
+  sobrenome     String
+  cpf           String
+  dataNascimento Date 
+  sexo          String
+  email         String    @unique
+  telefone      String
+  enderecoId    Int
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  endereco      pacientes_endereco  @relation(fields: [enderecoId], references: [id])
+}
+
+model pacientes_endereco {
+  id            Int       @id @default(autoincrement())
+  rua           String
+  numero        String
+  complemento   String?
+  bairro        String
+  cidade        String
+  estado        String
+  cep           String
+  createdAt     DateTime  @default(now())
+  updatedAt     DateTime  @updatedAt
+
+  // Relacionamentos
+  pacientes     pacientes[]
 }

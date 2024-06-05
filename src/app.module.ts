@@ -3,10 +3,11 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { ConfigurationModule } from './config/config.module';
 import { LoggerMiddleware } from './common/logger.middleware';
-import { AuthModule } from './auth/auth.module';
+import { AuthModule } from './modules/auth/auth.module';
+import { PacientesModule } from './modules/pacientes/pacientes.module';
 
 @Module({
-  imports: [ConfigurationModule, AuthModule],
+  imports: [ConfigurationModule, AuthModule, PacientesModule],
   controllers: [AppController],
   providers: [AppService],
 })
