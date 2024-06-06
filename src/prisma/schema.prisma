@@ -22,7 +22,7 @@ model pacientes {
   nome          String
   sobrenome     String
   cpf           String
-  dataNascimento Date 
+  dataNascimento String 
   sexo          String
   email         String    @unique
   telefone      String
@@ -43,7 +43,7 @@ model pacientes_endereco {
   estado        String
   cep           String
   createdAt     DateTime  @default(now())
-  updatedAt     DateTime  @updatedAt
+  updatedAt     DateTime  @default(now()) @updatedAt
 
   // Relacionamentos
   pacientes     pacientes[]

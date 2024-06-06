@@ -21,4 +21,12 @@ export class PacienteRepository {
       },
     });
   }
+
+  async findPacienteByEmailandCpf(email: string, cpf: string) {
+    return this.prisma.pacientes.findFirst({
+      where: {
+        OR: [{ email }, { cpf }],
+      },
+    });
+  }
 }
