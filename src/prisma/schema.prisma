@@ -17,7 +17,7 @@ model usuarios {
   updatedAt       DateTime          @default(now()) @updatedAt
 }
 
-model pacientes {
+model paciente {
   id            Int       @id @default(autoincrement())
   nome          String
   sobrenome     String
@@ -26,14 +26,13 @@ model pacientes {
   sexo          String
   email         String    @unique
   telefone      String
-  enderecoId    Int
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @updatedAt
 
-  endereco      pacientes_endereco  @relation(fields: [enderecoId], references: [id])
+  endereco      paciente_endereco?
 }
 
-model pacientes_endereco {
+model paciente_endereco {
   id            Int       @id @default(autoincrement())
   rua           String
   numero        String
@@ -45,6 +44,6 @@ model pacientes_endereco {
   createdAt     DateTime  @default(now())
   updatedAt     DateTime  @default(now()) @updatedAt
 
-  // Relacionamentos
-  pacientes     pacientes[]
+  pacienteId    Int       @unique
+  paciente      paciente @relation(fields: [pacienteId], references: [id])     
 }

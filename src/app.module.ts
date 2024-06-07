@@ -7,12 +7,12 @@ import { AuthModule } from './modules/auth/auth.module';
 import { PacientesModule } from './modules/pacientes/pacientes.module';
 
 @Module({
-  imports: [ConfigurationModule, AuthModule, PacientesModule],
-  controllers: [AppController],
-  providers: [AppService],
+	imports: [ConfigurationModule, AuthModule, PacientesModule],
+	controllers: [AppController],
+	providers: [AppService],
 })
 export class AppModule implements NestModule {
-  configure(consumer: MiddlewareConsumer) {
-    consumer.apply(LoggerMiddleware).forRoutes({ path: '*', method: RequestMethod.ALL });
-  }
+	configure(consumer: MiddlewareConsumer) {
+		consumer.apply(LoggerMiddleware).forRoutes({ path: '*', method: RequestMethod.ALL });
+	}
 }

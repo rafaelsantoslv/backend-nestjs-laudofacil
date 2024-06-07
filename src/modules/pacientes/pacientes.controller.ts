@@ -1,33 +1,37 @@
-import { Controller, Post, Body } from '@nestjs/common';
+import { Controller, Post, Body, Get, Param, NotFoundException } from '@nestjs/common';
 import { PacientesService } from './pacientes.service';
 import { CreatePacienteDto } from './dto/create-paciente.dto';
 
 @Controller('pacientes')
 export class PacientesController {
-  constructor(private readonly pacientesService: PacientesService) {}
+	constructor(private readonly pacientesService: PacientesService) {}
 
-  @Post()
-  create(@Body() createPacienteDto: CreatePacienteDto) {
-    return this.pacientesService.createPaciente(createPacienteDto);
-  }
+	@Post()
+	create(@Body() createPacienteDto: CreatePacienteDto) {
+		return this.pacientesService.createPaciente(createPacienteDto);
+	}
 
-  // @Get()
-  // findAll() {
-  //   return this.pacientesService.findAll();
-  // }
+	// @Get()
+	// findAll() {
+	//   return this.pacientesService.findAll();
+	// }
 
-  // @Get(':id')
-  // findOne(@Param('id') id: string) {
-  //   return this.pacientesService.findOne(+id);
-  // }
+	@Get(':id')
+	findOne(@Param('id') id: string) {
+		const pacienteId = parseInt(id, 10);
+		if (isNaN(pacienteId)) {
+			throw new NotFoundException('ID Inválido');
+		}
+		return this.pacientesService.findOnePaciente(pacienteId);
+	}
 
-  // @Patch(':id')
-  // update(@Param('id') id: string, @Body() updatePacienteDto: UpdatePacienteDto) {
-  //   return this.pacientesService.update(+id, updatePacienteDto);
-  // }
+	// @Patch(':id')
+	// update(@Param('id') id: string, @Body() updatePacienteDto: UpdatePacienteDto) {
+	//   return this.pacientesService.update(+id, updatePacienteDto);
+	// }
 
-  // @Delete(':id')
-  // remove(@Param('id') id: string) {
-  //   return this.pacientesService.remove(+id);
-  // }
+	// @Delete(':id')
+	// remove(@Param('id') id: string) {
+	//   return this.pacientesService.remove(+id);
+	// }
 }
