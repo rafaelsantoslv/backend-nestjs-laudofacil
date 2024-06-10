@@ -35,4 +35,14 @@ export class PacienteRepository {
 			include: { endereco: true },
 		});
 	}
+
+	async findPacienteAll(): Promise<Paciente[] | null> {
+		return this.prisma.paciente.findMany();
+	}
+
+	async deletePaciente(userId: number): Promise<Paciente> {
+		return this.prisma.paciente.delete({
+			where: { id: userId },
+		});
+	}
 }
