@@ -1,3 +1,4 @@
+import { PartialType } from '@nestjs/swagger';
 import { IsString, IsEmail, IsNotEmpty, Length } from 'class-validator';
 
 export class CreatePacienteDto {
@@ -28,3 +29,5 @@ export class CreatePacienteDto {
 	@IsString()
 	telefone: string;
 }
+
+export class UpdatePacienteDto extends PartialType(CreatePacienteDto) {}

@@ -1,5 +1,5 @@
 import { BadGatewayException, BadRequestException, Injectable } from '@nestjs/common';
-import { CreatePacienteDto } from './dto/create-paciente.dto';
+import { CreatePacienteDto, UpdatePacienteDto } from './dto/create-paciente.dto';
 import { Paciente } from './interfaces/paciente-interface';
 import { PacienteRepository } from './repositories/paciente.repository';
 
@@ -52,6 +52,19 @@ export class PacientesService {
 			return deletedPaciente;
 		} catch (error) {
 			throw new BadRequestException('Erro ao excluir Paciente', error.message);
+		}
+	}
+
+	async updatePaciente(id: number, data: UpdatePacienteDto): Promise<Paciente> {
+		try {
+			const consultaIdPaciente = await this.pacienteRepository.findPacienteById(id);
+			if (!consultaIdPaciente) {
+				throw new BadRequestException('ID não encontrado');
+			}
+			const updatedPaciente = await this.pacienteRepository.updatePaciente(id, data);
+			return updatedPaciente;
+		} catch (error) {
+			throw new BadRequestException('Erro ao modificar Paciente', error.message);
 		}
 	}
 }
