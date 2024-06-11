@@ -8,7 +8,7 @@ export class PacienteRepository {
 	constructor(private readonly prisma: PrismaService) {}
 
 	async addPaciente(data: CreatePacienteDto): Promise<Paciente | null> {
-		return this.prisma.paciente.create({
+		return this.prisma.pacientes.create({
 			data: {
 				nome: data.nome,
 				sobrenome: data.sobrenome,
@@ -22,7 +22,7 @@ export class PacienteRepository {
 	}
 
 	async findPacienteByEmailandCpf(email: string, cpf: string) {
-		return this.prisma.paciente.findFirst({
+		return this.prisma.pacientes.findFirst({
 			where: {
 				OR: [{ email }, { cpf }],
 			},
@@ -30,24 +30,24 @@ export class PacienteRepository {
 	}
 
 	async findPacienteById(id: number): Promise<Paciente | null> {
-		return this.prisma.paciente.findUnique({
+		return this.prisma.pacientes.findUnique({
 			where: { id },
 			include: { endereco: true },
 		});
 	}
 
 	async findPacienteAll(): Promise<Paciente[] | null> {
-		return this.prisma.paciente.findMany();
+		return this.prisma.pacientes.findMany();
 	}
 
 	async deletePaciente(userId: number): Promise<Paciente> {
-		return this.prisma.paciente.delete({
+		return this.prisma.pacientes.delete({
 			where: { id: userId },
 		});
 	}
 
 	async updatePaciente(userId: number, data: UpdatePacienteDto): Promise<Paciente> {
-		return this.prisma.paciente.update({
+		return this.prisma.pacientes.update({
 			where: { id: userId },
 			data: data,
 		});
