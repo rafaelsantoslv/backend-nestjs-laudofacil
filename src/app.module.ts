@@ -5,9 +5,10 @@ import { ConfigurationModule } from './config/config.module';
 import { LoggerMiddleware } from './common/logger.middleware';
 import { AuthModule } from './modules/auth/auth.module';
 import { PacientesModule } from './modules/pacientes/pacientes.module';
+import { LaudosModule } from './modules/laudos/laudos.module';
 
 @Module({
-	imports: [ConfigurationModule, AuthModule, PacientesModule],
+	imports: [ConfigurationModule, AuthModule, PacientesModule, LaudosModule],
 	controllers: [AppController],
 	providers: [AppService],
 })

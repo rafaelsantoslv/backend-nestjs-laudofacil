@@ -1,5 +1,6 @@
-import { Controller, Get, Post, Body, Patch, Param, Delete } from '@nestjs/common';
+import { Controller, Post, Body, Get, Param, ParseIntPipe } from '@nestjs/common';
 import { LaudosService } from './laudos.service';
+import { CreateLaudoDto } from './dto/create-laudo.dto';
 // import { CreateLaudoDto } from './dto/create-laudo.dto';
 // import { UpdateLaudoDto } from './dto/update-laudo.dto';
 
@@ -7,15 +8,15 @@ import { LaudosService } from './laudos.service';
 export class LaudosController {
 	constructor(private readonly laudosService: LaudosService) {}
 
-	// @Post()
-	// create(@Body() createLaudoDto: CreateLaudoDto) {
-	// 	return this.laudosService.create(createLaudoDto);
-	// }
+	@Post()
+	create(@Body() createLaudoDto: CreateLaudoDto) {
+		return this.laudosService.createLaudo(createLaudoDto);
+	}
 
-	// @Get()
-	// findAll() {
-	// 	return this.laudosService.findAll();
-	// }
+	@Get(':pacienteId')
+	findAll(@Param('pacienteId', ParseIntPipe) id: number) {
+		return this.laudosService.findAllLaudoPaciente(id);
+	}
 
 	// @Get(':id')
 	// findOne(@Param('id') id: string) {

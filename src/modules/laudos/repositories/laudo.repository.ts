@@ -2,6 +2,7 @@ import { Injectable } from '@nestjs/common';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { CreateLaudoDto } from '../dto/create-laudo.dto';
 import { Laudo } from '../interfaces/laudo-interface';
+import { UpdateLaudoDto } from '../dto/update-laudo.dto';
 
 @Injectable()
 export class LaudoRepository {
@@ -25,15 +26,23 @@ export class LaudoRepository {
 		});
 	}
 
-	async findLaudoAllByPacienteId(id: number): Promise<Laudo[]> {
+	async findLaudoAllByPacienteId(pacienteId: number): Promise<Laudo[]> {
+		console.log(pacienteId);
 		return this.prisma.laudos.findMany({
-			where: { id },
+			where: { pacienteId },
 		});
 	}
 
 	async deleteLaudo(id: number): Promise<Laudo> {
 		return this.prisma.laudos.delete({
 			where: { id },
+		});
+	}
+
+	async updateLaudo(id: number, data: UpdateLaudoDto): Promise<Laudo> {
+		return this.prisma.laudos.update({
+			where: { id },
+			data: data,
 		});
 	}
 }
