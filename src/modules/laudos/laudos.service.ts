@@ -25,11 +25,11 @@ export class LaudosService {
 
 	async findAllLaudoPaciente(pacienteId: number) {
 		try {
-			// const pacienteExistente = await this.pacienteRepository.findPacienteById(pacienteId);
-			// if (!pacienteExistente) {
-			// 	throw new BadRequestException('ID de paciente incorreto');
-			// }
-			return this.laudoRepository.findLaudoAllByPacienteId(pacienteId);
+			const pacienteExistente = await this.pacienteRepository.findPacienteById(pacienteId);
+			if (!pacienteExistente) {
+				throw new BadRequestException('ID de paciente incorreto');
+			}
+			return this.laudoRepository.findAllLaudoByPacienteId(pacienteId);
 		} catch (error) {
 			throw new BadRequestException('Erro ao encontrar laudos do paciente', error.message);
 		}

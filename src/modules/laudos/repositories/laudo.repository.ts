@@ -26,8 +26,7 @@ export class LaudoRepository {
 		});
 	}
 
-	async findLaudoAllByPacienteId(pacienteId: number): Promise<Laudo[]> {
-		console.log(pacienteId);
+	async findAllLaudoByPacienteId(pacienteId: number): Promise<Laudo[]> {
 		return this.prisma.laudos.findMany({
 			where: { pacienteId },
 		});

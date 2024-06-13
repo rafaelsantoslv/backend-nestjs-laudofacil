@@ -29,7 +29,7 @@ export class PacienteRepository {
 		});
 	}
 
-	async findPacienteById(id: number): Promise<Paciente | null> {
+	async findPacienteById(id: number): Promise<Paciente> {
 		return this.prisma.pacientes.findUnique({
 			where: { id },
 			include: { endereco: true },
