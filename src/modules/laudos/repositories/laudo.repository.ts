@@ -20,7 +20,7 @@ export class LaudoRepository {
 		});
 	}
 
-	async findLaudoByPacienteId(id: number): Promise<Laudo> {
+	async findOneLaudo(id: number): Promise<Laudo> {
 		return this.prisma.laudos.findUnique({
 			where: { id },
 		});

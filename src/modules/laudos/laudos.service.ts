@@ -2,7 +2,6 @@ import { BadRequestException, Injectable } from '@nestjs/common';
 import { LaudoRepository } from './repositories/laudo.repository';
 import { CreateLaudoDto } from './dto/create-laudo.dto';
 import { PacienteRepository } from '../pacientes/repositories/paciente.repository';
-// import { Paciente } from '../pacientes/interfaces/paciente-interface';
 
 @Injectable()
 export class LaudosService {
@@ -34,9 +33,18 @@ export class LaudosService {
 			throw new BadRequestException('Erro ao encontrar laudos do paciente', error.message);
 		}
 	}
-	// findAll() {
-	// 	return `This action returns all laudos`;
-	// }
+
+	async findOneLaudoPaciente(id: number) {
+		try {
+			const laudoExistente = await this.laudoRepository.findOneLaudo(id);
+			if (!laudoExistente) {
+				throw new BadRequestException(`Laudo ID ${id} não encontrado`);
+			}
+			return laudoExistente;
+		} catch (error) {
+			throw new BadRequestException('Erro ao buscar laudo', error.message);
+		}
+	}
 	// findOne(id: number) {
 	// 	return `This action returns a #${id} laudo`;
 	// }

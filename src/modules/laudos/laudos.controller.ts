@@ -18,6 +18,11 @@ export class LaudosController {
 		return this.laudosService.findAllLaudoPaciente(id);
 	}
 
+	@Get('/mostralaudo/:laudoId')
+	findOne(@Param('laudoId', ParseIntPipe) laudoId: number) {
+		return this.laudosService.findOneLaudoPaciente(laudoId);
+	}
+
 	// @Get(':id')
 	// findOne(@Param('id') id: string) {
 	// 	return this.laudosService.findOne(+id);
